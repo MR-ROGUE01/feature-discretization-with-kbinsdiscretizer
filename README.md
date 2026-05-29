@@ -6,20 +6,21 @@ Binning continuous features (Age, Fare) from the Titanic dataset using sklearn's
 
 - Loads Titanic data (Age, Fare, Survived columns only)
 - Splits into train/test (80/20)
-- Baseline DecisionTree accuracy: **61.5%** (test), **62.6%** (10-fold CV)
+- Baseline DecisionTree accuracy: **62.9%** (test), **62.7%** (10-fold CV)
 - Applies KBinsDiscretizer (15 bins, quantile strategy) via ColumnTransformer
 - After discretization accuracy: **63.6%** (test), **69.5%** (10-fold CV)
-- Compares kmeans vs quantile strategies across 10 bins
+- Compares uniform, quantile, and kmeans strategies across 10 bins
 - Visualizes before/after distributions for Age and Fare
 
 ## Key Results
 
 | Setup | Test Accuracy | CV Accuracy (10-fold) |
 |---|---|---|
-| Raw features | 61.5% | 62.6% |
+| Raw features | 62.9% | 62.7% |
 | KBins (15, quantile) | 63.6% | 69.5% |
-| KBins (10, kmeans) | — | 63.3% |
-| KBins (10, quantile) | — | 63.3% |
+| KBins (10, uniform) | — | 62.9% |
+| KBins (10, quantile) | — | 63.2% |
+| KBins (10, kmeans) | — | 63.2% |
 
 ## Stack
 
@@ -39,5 +40,6 @@ Place `train.csv` (Titanic dataset from Kaggle) in the same directory.
 - **KBinsDiscretizer** — converts continuous features into ordinal bins
 - **ColumnTransformer** — applies different transformers to different columns
 - **Quantile strategy** — equal-frequency bins, handles skewed data better
+- **Uniform strategy** — equal-width bins
 - **KMeans strategy** — bins based on cluster centers
 - Transformers fit on train split only — zero data leakage
